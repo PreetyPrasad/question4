@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students</title>
+</head>
+<body>
+    <h1>Student List</h1>
+    <form action="/students/add" method="POST">
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="number" name="age" placeholder="Age" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="major" placeholder="Major">
+        <button type="submit">Add Student</button>
+    </form>
+    <ul>
+        <% students.forEach(student => { %>
+            <li>
+                <%= student.name %> - <%= student.email %>
+                <form action="/students/edit/<%= student._id %>" method="POST">
+                    <input type="text" name="name" value="<%= student.name %>" required>
+                    <input type="number" name="age" value="<%= student.age %>" required>
+                    <input type="email" name="email" value="<%= student.email %>" required>
+                    <input type="text" name="major" value="<%= student.major %>">
+                    <button type="submit">Edit</button>
+                </form>
+                <a href="/students/delete/<%= student._id %>">Delete</a>
+            </li>
+        <% }) %>
+    </ul>
+    <a href="/logout">Logout</a>
+</body>
+</html>
